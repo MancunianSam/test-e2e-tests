@@ -14,6 +14,9 @@ class Lambda extends RequestHandler[java.util.Map[String, String], Unit] {
   override def handleRequest(input: util.Map[String, String], context: Context): Unit = {
     val name = input.get("name")
     val file = input.get("file")
-    Main.run("-p", "pretty", "--name", s"^$name$$", "--glue", "steps", getClass.getResource(s"/features/$file").getPath)
+    val ex = Main.run("-p", "pretty", "--name", s"^$name$$", "--glue", "steps", getClass.getResource(s"/features/$file").getPath)
+    if(ex != 0) {
+      throw new RuntimeException("Error")
+    } else ()
   }
 }
