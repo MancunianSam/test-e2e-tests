@@ -27,7 +27,7 @@ jobs:
       - run: |
           import json
           with open("payload.json", 'a') as p:
-            print(json.dumps(${{ matrix.scenario }}), file=p)
+            print(json.dumps(${{ toJSON(matrix.scenario) }}), file=p)
         shell: python
       - uses: aws-actions/configure-aws-credentials@v1-node16
         with:
