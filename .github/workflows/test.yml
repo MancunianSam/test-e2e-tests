@@ -8,6 +8,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - id: list-scenarios
         run: python .github/scripts/list_scenarios.py
   run-e2e-tests:
