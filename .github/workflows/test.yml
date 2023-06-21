@@ -24,6 +24,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - run: |
+          import json
+          with open("payload.json", 'a') as p:
+            print(json.dumps(${{ matrix.scenario }}), file=p)
       - uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_NUMBER }}:role/IntgDPGithubActionsDeployLambdaRole
@@ -31,4 +35,4 @@ jobs:
           role-session-name: UpdateWAF
       - name: Run Tests
         run: |
-          aws lambda invoke --function-name dr2-e2e-tests-intg out --payload '${{ toJSON(matrix.scenario) }}' --log-type Tail --query 'LogResult' --output text --cli-binary-format raw-in-base64-out | base64 -d
+          aws lambda invoke --function-name dr2-e2e-tests-intg out --payload file://payload.json --log-type Tail --query 'LogResult' --output text --cli-binary-format raw-in-base64-out | base64 -d
