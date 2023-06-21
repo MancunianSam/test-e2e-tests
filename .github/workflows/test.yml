@@ -1,0 +1,29 @@
+name: End to end tests
+on:
+  push:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - id: list-scenarios
+        run: python .github/scripts/list_scenarios.py
+  run-e2e-tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    strategy:
+      matrix:
+        scenario: ${{ fromJSON(needs.setup.outputs.scenarios) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_NUMBER }}:role/IntgDPGithubActionsDeployLambdaRole
+          aws-region: eu-west-2
+          role-session-name: UpdateWAF
+      - name: Run Tests
+        run: |
+          aws lambda invoke --function-name dr2-e2e-tests-intg out --payload '${{ toJSON(matrix.scenario) }}' --log-type Tail --query 'LogResult' --output text --cli-binary-format raw-in-base64-out | base64 -d
