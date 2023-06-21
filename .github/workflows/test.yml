@@ -1,6 +1,7 @@
 name: End to end tests
 on:
   push:
+  workflow_dispatch:
 permissions:
   id-token: write
   contents: read

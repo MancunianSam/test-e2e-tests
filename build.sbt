@@ -16,7 +16,9 @@ lazy val root = (project in file("."))
       "io.cucumber" % "cucumber-junit-platform-engine" % "7.11.1" % Test,
       "io.cucumber" % "cucumber-junit" % "7.12.1" % Test,
       "org.scalatest" %% "scalatest" % "3.2.15" % Test,
-      "com.github.sbt" % "junit-interface" % "0.13.3" % Test
+      "com.github.sbt" % "junit-interface" % "0.13.3" % Test,
+      "uk.gov.nationalarchives" %% "da-s3-client" % "0.1.3" % Test,
+      "co.fs2" %% "fs2-reactive-streams" % "3.7.0" % Test
     ),
     libraryDependencies += munit % Test
   )
