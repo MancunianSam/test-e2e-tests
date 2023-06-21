@@ -41,7 +41,7 @@ jobs:
       - run: |
           import json
           with open(f'out', 'r') as fh:
-            if: json.loads(fh.read()) == None
+            if json.loads(fh.read()) == None:
               exit 0
             else: 
               exit 1
