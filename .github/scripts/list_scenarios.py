@@ -13,7 +13,7 @@ for file in files:
         names = [{"file": file, "name": x["scenario"]["name"]} for x in gherkin_document["feature"]["children"]]
         output.extend(names)
 
-with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
-    print(f'scenarios={json.dumps({"include": output})}', file=fh)
+with open(os.environ['GITHUB_OUTPUT'], 'a') as go:
+    print(f'scenarios={json.dumps({"include": output})}', file=go)
 
 
