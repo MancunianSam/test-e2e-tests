@@ -14,6 +14,6 @@ for file in files:
         output.extend(names)
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as go:
-    print(f'scenarios={json.dumps({"include": output})}', file=go)
+    print(f'scenarios={json.dumps(output)}', file=go)
 
 

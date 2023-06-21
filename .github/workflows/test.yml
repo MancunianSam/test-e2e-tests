@@ -7,6 +7,8 @@ permissions:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      scenarios: ${{ steps.list-scenarios.outputs.scenarios }}
     steps:
       - uses: actions/checkout@v3
       - id: list-scenarios
