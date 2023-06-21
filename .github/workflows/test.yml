@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: list-scenarios
-        run: python .github/scripts/list_scenarios.py
+        run: |
+          pip install gherkin-official
+          python .github/scripts/list_scenarios.py
   run-e2e-tests:
     runs-on: ubuntu-latest
     needs: setup
