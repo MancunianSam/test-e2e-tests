@@ -28,6 +28,7 @@ jobs:
           import json
           with open("payload.json", 'a') as p:
             print(json.dumps(${{ matrix.scenario }}), file=p)
+        shell: python
       - uses: aws-actions/configure-aws-credentials@v1-node16
         with:
           role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_NUMBER }}:role/IntgDPGithubActionsDeployLambdaRole
