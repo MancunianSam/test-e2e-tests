@@ -3,7 +3,7 @@ import os
 import json
 
 parser = Parser()
-path = '/home/sam/repositories/dp/dr2-e2e-tests-scala/src/test/resources/features/'
+path = 'src/test/resources/features/'
 files = os.listdir(path)
 output = []
 for file in files:
